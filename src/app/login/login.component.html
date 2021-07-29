@@ -1,0 +1,51 @@
+<div style="min-width: 100%;min-height: 200%;background-image: url('/assets/img/wood-09.jpg');background-size: cover;">
+    <br><br><br>
+    <div class="container" style="max-width: 600px;background-color: white;">
+        <br>
+        <h2 class="textual">User Login form</h2>
+    <form #loginform="ngForm" (ngSubmit) = "loginUser()">
+        <small class="text-danger">{{msg}}</small>
+        <!-- <small [class.text-danger]="msg.status==500">{{msg.message}}</small> -->
+        <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Email:</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" placeholder="Enter email" name="email" [(ngModel)] = "user.email" required pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" #email="ngModel" [class.is-invalid] = "email.invalid && email.touched">
+
+          <!-- <small class="text-danger" [class.d-none] = "email.valid || email.untouched">Email is required field.</small> -->
+            
+          <div *ngIf="email.errors && (email.invalid && email.touched)">
+              <small class="test-danger" *ngIf="email.errors.required">Email is required field.</small>
+              <small class="text-danger" *ngIf="email.errors.pattern">Please enter a valid email format.</small>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="pwd">Password:</label>
+        <div class="col-sm-10">          
+            <input type="password" class="form-control" placeholder="Enter password" name="password" [(ngModel)] = "user.password" required #password="ngModel" [class.is-invalid] = "password.invalid && password.touched">
+            <small class="text-danger" [class.d-none] = "password.valid || password.untouched">Password is required field.</small>
+        </div>
+      </div>
+      <div class="form-group">        
+        <div class="col-sm-offset-2 col-sm-10">
+          <div class="checkbox">
+            <label><input type="checkbox" name="remember"> Remember me</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">        
+        <div class="col-sm-offset-2 col-sm-10">
+          <button [disabled]="loginform.invalid" type="submit" class="btn btn-info">Login</button>
+        </div>
+        <br>
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-info" (click)="goToRegistration()">Register Here</button>
+          </div>
+         </div>
+    </form>
+    <!-- <small class="float-right" (click)="goToRegistration()">New user ? Register here.</small> -->
+    <small class="float-right" [routerLink]="['/registration']">New user ? Register here.</small>
+    <br>
+</div>
+  <br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
